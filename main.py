@@ -48,7 +48,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
     return MAINMENU
 
-
+# жесткое изменение
 async def biba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # query - запрос
     query = update.callback_query
