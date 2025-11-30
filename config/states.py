@@ -1,0 +1,1 @@
+MAINMENU, TALK, BIBA = range(3)
