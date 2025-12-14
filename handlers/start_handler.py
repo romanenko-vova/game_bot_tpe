@@ -19,6 +19,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("Режим бибы", callback_data="biba")],
     ]
     markup = InlineKeyboardMarkup(keyboard)
+    context.user_data['previous_messages'] = []
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
         text=f"Привет {update.effective_user.first_name}!\n\nНапиши команду:\n /talk чтобы поговорить со мной.\n /biba чтобы получить бобу.",
