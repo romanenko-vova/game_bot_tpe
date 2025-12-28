@@ -18,6 +18,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("Режим разговора", callback_data="talk")],
         [InlineKeyboardButton("Режим бибы", callback_data="biba")],
         [InlineKeyboardButton("Игра 'Бот угадывает число'", callback_data="guess_number")],
+        [InlineKeyboardButton("Игра 'Крестики-нолики'", callback_data="tictactoe")],
     ]
     markup = InlineKeyboardMarkup(keyboard)
     context.user_data['previous_messages'] = []
