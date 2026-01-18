@@ -8,7 +8,7 @@ async def tictactoe_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query  # Полная информация о нажатой кнопке
     await query.answer()  # отвечаем на запрос
     context.user_data["lst"] = [
-        "⬜",
+        "⬜️",
         "⬜️",
         "⬜️",
         "⬜️",
