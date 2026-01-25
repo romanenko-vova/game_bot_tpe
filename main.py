@@ -12,6 +12,7 @@ from handlers.biba_handlers import biba, say_boba, say_biba
 from handlers.talk_handlers import talk_start, talk, say_contact
 from handlers.guess_number_handlers import guess_number_start, guess_number
 from handlers.tictactoe_handlers import tictactoe_start, tictactoe
+from handlers.tictactoe_online import tictactoe_online_start
 from handlers.start_handler import start
 from config.states import MAINMENU, TALK, BIBA, GUESS_NUMBER, TICTACTOE
 
@@ -38,6 +39,9 @@ if __name__ == "__main__":
                     guess_number_start, pattern="guess_number"
                 ),
                 CallbackQueryHandler(tictactoe_start, pattern="tictactoe"),
+                CallbackQueryHandler(
+                    tictactoe_online_start, pattern="online_tictactoe"
+                ),
             ],
             TALK: [MessageHandler(filters.TEXT & ~filters.COMMAND, talk)],
             BIBA: [
@@ -60,5 +64,8 @@ if __name__ == "__main__":
     # & - и
     # | - или
     # ~ - не
+    application.bot_data["queue"] = []
+    application.bot_data["games"] = {}
+    application.bot_data["last_game_id"] = 0
 
     application.run_polling()
