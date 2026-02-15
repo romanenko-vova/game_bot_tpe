@@ -15,6 +15,7 @@ from handlers.tictactoe_handlers import tictactoe_start, tictactoe
 from handlers.tictactoe_online import tictactoe_online_start
 from handlers.start_handler import start
 from config.states import MAINMENU, TALK, BIBA, GUESS_NUMBER, TICTACTOE
+from db.database import create_tables
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -23,7 +24,12 @@ logging.basicConfig(
 
 
 if __name__ == "__main__":
-    application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+    application = (
+        ApplicationBuilder()
+        .post_init(create_tables)
+        .token(TELEGRAM_TOKEN)
+        .build()
+    )
 
     # handler - обработчик
     # CommandHandler - обработчик команд
