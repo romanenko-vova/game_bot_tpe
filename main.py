@@ -13,9 +13,10 @@ from handlers.talk_handlers import talk_start, talk, say_contact
 from handlers.guess_number_handlers import guess_number_start, guess_number
 from handlers.tictactoe_handlers import tictactoe_start, tictactoe
 from handlers.tictactoe_online import tictactoe_online_start
-from handlers.start_handler import start
-from config.states import MAINMENU, TALK, BIBA, GUESS_NUMBER, TICTACTOE
+from handlers.start_handler import start, get_age
+from config.states import MAINMENU, TALK, BIBA, GUESS_NUMBER, TICTACTOE, GET_AGE, TICTACTOE_ONLINE
 from db.database import create_tables
+from handlers.tictactoe_online import tictactoe_online
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -38,6 +39,9 @@ if __name__ == "__main__":
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
+            GET_AGE: [
+                MessageHandler(filters.TEXT & ~filters.COMMAND, get_age)
+            ],
             MAINMENU: [
                 CallbackQueryHandler(biba, pattern="biba"),
                 CallbackQueryHandler(talk_start, pattern="talk"),
@@ -60,6 +64,9 @@ if __name__ == "__main__":
             ],
             TICTACTOE: [
                 CallbackQueryHandler(tictactoe, pattern="^[0-8]$"),
+            ],
+            TICTACTOE_ONLINE: [
+                CallbackQueryHandler(tictactoe_online, pattern="^[0-8]$"),
             ],
         },
         fallbacks=[CommandHandler("start", start)],
