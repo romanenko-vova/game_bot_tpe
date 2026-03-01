@@ -1,3 +1,4 @@
+from turtle import up
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes, ConversationHandler
 from config.states import MAINMENU, GET_AGE
@@ -10,8 +11,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # update.effective_user - вся инфа о пользователе
     # update.effective_message - вся инфа о сообщении
     # update.effective_message.text - текст сообщения
-    
+    update.eff
     user = await get_user(update.effective_user.id)
+    print(user)
     # guard statement - если пользователь не найден, то запрашиваем возраст
     if not user:
         user = await add_user(update.effective_user.id)

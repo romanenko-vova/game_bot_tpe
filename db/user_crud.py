@@ -12,6 +12,7 @@ async def get_user(tg_id):
     db.row_factory = aiosqlite.Row
     res = await db.execute("SELECT * FROM users WHERE tg_id = ?", [tg_id])
     user = await res.fetchone()
+    print(user)
     await db.close()
     if user:
         return dict(user)

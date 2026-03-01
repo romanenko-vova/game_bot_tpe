@@ -75,7 +75,6 @@ async def tictactoe_online_start(
 async def tictactoe_online(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
-
     game_id = context.user_data["game_id"]
     game = context.bot_data["games"][game_id]
     print("Информация о вашей игре", game)
