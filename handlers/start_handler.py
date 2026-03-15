@@ -11,7 +11,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # update.effective_user - вся инфа о пользователе
     # update.effective_message - вся инфа о сообщении
     # update.effective_message.text - текст сообщения
-    update.eff
+
     user = await get_user(update.effective_user.id)
     print(user)
     # guard statement - если пользователь не найден, то запрашиваем возраст
@@ -54,7 +54,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id=update.effective_chat.id,
         text=f"Привет {update.effective_user.first_name}!\n\nНапиши команду:\n /talk чтобы поговорить со мной.\n /biba чтобы получить бобу.",
         reply_markup=markup,
+        
     )
+    
     return MAINMENU
 
 

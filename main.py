@@ -6,7 +6,9 @@ from telegram.ext import (
     filters,
     ConversationHandler,
     CallbackQueryHandler,
+    PicklePersistence,
 )
+
 from config.config import TELEGRAM_TOKEN
 from handlers.biba_handlers import biba, say_boba, say_biba
 from handlers.talk_handlers import talk_start, talk, say_contact
@@ -14,7 +16,15 @@ from handlers.guess_number_handlers import guess_number_start, guess_number
 from handlers.tictactoe_handlers import tictactoe_start, tictactoe
 from handlers.tictactoe_online import tictactoe_online_start
 from handlers.start_handler import start, get_age
-from config.states import MAINMENU, TALK, BIBA, GUESS_NUMBER, TICTACTOE, GET_AGE, TICTACTOE_ONLINE
+from config.states import (
+    MAINMENU,
+    TALK,
+    BIBA,
+    GUESS_NUMBER,
+    TICTACTOE,
+    GET_AGE,
+    TICTACTOE_ONLINE,
+)
 from db.database import create_tables
 from handlers.tictactoe_online import tictactoe_online
 
@@ -25,10 +35,12 @@ logging.basicConfig(
 
 
 if __name__ == "__main__":
+    persistence = PicklePersistence("bot_cache")
     application = (
         ApplicationBuilder()
         .post_init(create_tables)
         .token(TELEGRAM_TOKEN)
+        .persistence(persistence)
         .build()
     )
 
@@ -70,6 +82,8 @@ if __name__ == "__main__":
             ],
         },
         fallbacks=[CommandHandler("start", start)],
+        persistent=True,
+        name="conv_handler",
     )
 
     application.add_handler(conv_handler)
