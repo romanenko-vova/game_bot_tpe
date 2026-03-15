@@ -1,4 +1,3 @@
-from turtle import up
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes, ConversationHandler
 from config.states import MAINMENU, GET_AGE
