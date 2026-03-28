@@ -2,11 +2,10 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes
 from config.states import TICTACTOE_ONLINE
 from utils.make_keyboard_ttt import make_keyboard_ttt
+from db.user_crud import get_user
 
 
-async def tictactoe_online_start(
-    update: Update, context: ContextTypes.DEFAULT_TYPE
-):
+async def tictactoe_online_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print("tictactoe_online_start")
     query = update.callback_query
     board = ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"]
@@ -33,12 +32,15 @@ async def tictactoe_online_start(
 
         message_krestik = await context.bot.send_message(
             chat_id=first_user,
-            text="Йоу мы нашли тебе бедолагу!",
+            text=f"Йоу мы нашли тебе бедолагу! Это {update.effective_user.first_name}",
             reply_markup=markup,
         )
+        # получаем имя соперника
+        user = await get_user(first_user)
+        
         message_nolik = await context.bot.send_message(
             chat_id=second_user,
-            text="Ты оказался бедолагой!",
+            text=f"Ты оказался бедолагой! Твой соперник — {user['name']}",
             reply_markup=markup,
         )
         context.bot_data["games"][game_id] = {
@@ -68,7 +70,7 @@ async def tictactoe_online(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 text="Сейчас не твой ход!",
             )
             return TICTACTOE_ONLINE
-        elif game["krestik"] == update.effective_user.id:
+        else:
             n_kletki = int(query.data)
             game["board"][n_kletki] = "❌"
             markup = make_keyboard_ttt(game["board"])
@@ -78,11 +80,34 @@ async def tictactoe_online(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             print(context.bot_data["games"])
             await context.bot.edit_message_text(
-                "Твой напарник походил. Делай ход!",
-                game["nolik"],
-                game["message_nolik"],
+                text="Твой напарник походил. Делай ход!",
+                chat_id=game["nolik"],
+                message_id=game["message_nolik"],
                 reply_markup=markup,
             )
-
+            context.bot_data["games"][game_id]['hod'] += 1
             return TICTACTOE_ONLINE
-        # что произойдет, если ход крестика и вы сейчас в крестике
+    if game["hod"] % 2 == 0:
+        if game["nolik"] != update.effective_user.id:
+            await context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                text="Сейчас не твой ход!",
+            )
+            return TICTACTOE_ONLINE
+        else:
+            n_kletki = int(query.data)
+            game["board"][n_kletki] = "⭕️"
+            markup = make_keyboard_ttt(game["board"])
+            await query.edit_message_text(
+                text="Ход крестиков.",
+                reply_markup=markup,
+            )
+            print(context.bot_data["games"])
+            await context.bot.edit_message_text(
+                text="Твой напарник походил. Делай ход!",
+                chat_id=game["krestik"],
+                message_id=game["message_krestik"],
+                reply_markup=markup,
+            )
+            context.bot_data["games"][game_id]['hod'] += 1
+            return TICTACTOE_ONLINE

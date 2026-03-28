@@ -15,7 +15,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(user)
     # guard statement - если пользователь не найден, то запрашиваем возраст
     if not user:
-        user = await add_user(update.effective_user.id)
+        user = await add_user(update.effective_user.id, update.effective_user.first_name)
     if not user["age"]:
         await context.bot.send_message(
             chat_id=update.effective_chat.id, text="Привет! Сколько тебе лет?"
@@ -46,6 +46,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "Крестики Нолики по сети", callback_data="online_tictactoe"
             )
         ],
+        [InlineKeyboardButton("Топ игроков", callback_data="top_players")],
     ]
     markup = InlineKeyboardMarkup(keyboard)
     context.user_data["previous_messages"] = []
@@ -53,9 +54,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id=update.effective_chat.id,
         text=f"Привет {update.effective_user.first_name}!\n\nНапиши команду:\n /talk чтобы поговорить со мной.\n /biba чтобы получить бобу.",
         reply_markup=markup,
-        
     )
     
+    context.user_data["page"] = 1
     return MAINMENU
 
 

@@ -27,6 +27,7 @@ from config.states import (
 )
 from db.database import create_tables
 from handlers.tictactoe_online import tictactoe_online
+from handlers.top_players_hand import top_players
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -64,6 +65,7 @@ if __name__ == "__main__":
                 CallbackQueryHandler(
                     tictactoe_online_start, pattern="online_tictactoe"
                 ),
+                CallbackQueryHandler(top_players, pattern="top_players"),
             ],
             TALK: [MessageHandler(filters.TEXT & ~filters.COMMAND, talk)],
             BIBA: [

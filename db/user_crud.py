@@ -1,8 +1,8 @@
 import aiosqlite
 # CRUD - Create, Read, Update, Delete
-async def add_user(tg_id):
+async def add_user(tg_id, name):
     db = await aiosqlite.connect("database.db")
-    await db.execute("INSERT INTO users (tg_id) VALUES(?)", [tg_id])
+    await db.execute("INSERT INTO users (tg_id, name) VALUES(?, ?)", [tg_id, name])
     await db.commit()
     await db.close()
     return await get_user(tg_id) # когда человека добавил — верни его
@@ -17,6 +17,13 @@ async def get_user(tg_id):
     if user:
         return dict(user)
     return None
+
+async def get_top_players():
+     db = await aiosqlite.connect("database.db")
+     res = await db.execute("SELECT * FROM users")
+     users = await res.fetchall()
+     await db.close()
+     return users # [(1,431425615,13,3),(2,5150156527,13,0)]
 
 async def update_age(tg_id, age):
     db = await aiosqlite.connect("database.db")

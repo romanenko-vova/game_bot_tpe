@@ -52,9 +52,7 @@ async def talk(update: Update, context: ContextTypes.DEFAULT_TYPE):
             chat_id=update.effective_chat.id,
             text=response_text,
         )
-        context.user_data["previous_messages"].append(
-            {"role": "user", "content": text}
-        )
+        context.user_data["previous_messages"].append({"role": "user", "content": text})
         context.user_data["previous_messages"].append(
             {"role": "assistant", "content": response_text}
         )
