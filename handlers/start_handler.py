@@ -1,4 +1,4 @@
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import ContextTypes, ConversationHandler
 from config.states import MAINMENU, GET_AGE
 from db.user_crud import add_user, get_user, update_age
@@ -47,6 +47,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
         ],
         [InlineKeyboardButton("Топ игроков", callback_data="top_players")],
+        [InlineKeyboardButton('кнопка webapp', web_app=WebAppInfo('https://e5f5-2405-4802-e686-4e00-d87e-dc0c-b954-9dfa.ngrok-free.app'))]
     ]
     markup = InlineKeyboardMarkup(keyboard)
     context.user_data["previous_messages"] = []
