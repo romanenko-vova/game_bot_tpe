@@ -47,7 +47,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
         ],
         [InlineKeyboardButton("Топ игроков", callback_data="top_players")],
-        [InlineKeyboardButton('кнопка webapp', web_app=WebAppInfo('https://e5f5-2405-4802-e686-4e00-d87e-dc0c-b954-9dfa.ngrok-free.app'))]
+        [InlineKeyboardButton('кнопка webapp', web_app=WebAppInfo('https://6785-2405-4803-5288-7840-c8d8-9f-5db6-8f6a.ngrok-free.app'))]
     ]
     markup = InlineKeyboardMarkup(keyboard)
     context.user_data["previous_messages"] = []

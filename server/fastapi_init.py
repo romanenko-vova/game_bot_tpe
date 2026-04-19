@@ -1,6 +1,5 @@
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
-
+from fastapi.responses import FileResponse, Response
 
 # 1. сервер, который хостинг, который комп в интернете
 # 2. сервер, как fastapi — сервер, который принимает запросы из интернета и отдает ответы
@@ -9,9 +8,13 @@ from fastapi.responses import FileResponse
 def init_server():
     app = FastAPI()
     
-    @app.get("/")
+    @app.get('/')
     def index():
-        return FileResponse('index.html')
+        return FileResponse('templates/index.html')
+    
+    @app.get('/about')
+    def about():
+        return FileResponse('templates/about.html')
     
     return app
 
