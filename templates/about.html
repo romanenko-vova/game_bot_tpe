@@ -1,12 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О компании</title>
-</head>
-<body>
-    <h1>Мы крутые</h1>
-    <a href="/">Скачать Telegram</a>
-</body>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Владимир — Репетитор по программированию</title>
+
+    <style>
+      /* --- БАЗОВЫЕ НАСТРОЙКИ --- */
+      body {
+        font-family: Arial, sans-serif; /* Простой шрифт без засечек */
+        line-height: 1.6; /* Удобный межстрочный интервал */
+        margin: 0; /* Убираем отступы по краям экрана */
+        padding: 0;
+        background-color: rgb(255, 213, 43); /* Светло-серый фон страницы */
+        color: #000000; /* Темно-серый цвет текста для глаз приятнее черного */
+      }
+
+      /* --- КОНТЕЙНЕР ДЛЯ КОНТЕНТА --- */
+      .container {
+        width: 80%; /* Контент занимает 80% ширины экрана */
+        max-width: 800px; /* Но не больше 800 пикселей на больших мониторах */
+        margin: 40px auto; /* Центрируем контейнер по горизонтали */
+      }
+
+      /* --- ШАПКА САЙТА --- */
+      header {
+        background-color: rgb(48, 73, 97); /* Темно-синий фон */
+        color: #ffffff; /* Белый текст */
+        text-align: center; /* Текст по центру */
+        padding: 40px 20px; /* Внутренние отступы */
+        border-radius: 10px; /* Закругленные углы */
+        margin-bottom: 30px; /* Отступ снизу */
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.5em; /* Крупный размер имени */
+      }
+
+      header p {
+        margin: 10px 0 0;
+        font-size: 1.2em;
+        color: #1abc9c; /* Бирюзовый акцент для профессии */
+      }
+
+      /* --- ОСНОВНЫЕ БЛОКИ ИНФОРМАЦИИ --- */
+      .section {
+        background: #ffffff; /* Белый фон карточки */
+        padding: 25px 30px;
+        margin-bottom: 25px;
+        border-radius: 10px; /* Закругленные углы */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Легкая тень для объема */
+      }
+
+      .section h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #1abc9c; /* Бирюзовая линия под заголовком */
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+
+      /* --- СПИСКИ --- */
+      ul {
+        list-style-type: square; /* Квадратные маркеры списка */
+        padding-left: 20px;
+      }
+
+      /* --- КОНТАКТЫ --- */
+      .contact-info {
+        font-weight: bold; /* Жирный текст */
+        color: #e74c3c; /* Красный цвет для привлечения внимания */
+      }
+      /* --- СЕТКА ДЛЯ ДВУХ КОЛОНОК --- */
+      .split-section {
+        display: flex; /* Включаем "гибкий" режим для этого блока */
+        gap: 40px; /* Расстояние между левой и правой колонкой */
+      }
+
+      .column {
+        flex: 1; /* Каждая колонка занимает ровно половину свободного места */
+      }
+
+      /* Адаптивность для мобильных телефонов (чтобы на маленьких экранах не было слишком узко) */
+      @media (max-width: 600px) {
+        .split-section {
+          flex-direction: column; /* Выстраиваем колонки друг под другом на телефонах */
+          gap: 20px;
+        }
+      }
+
+      .stroka {
+        display: flex;
+      }
+
+      .kolonka1 {
+        background-color: #ff0000;
+        height: 100px;
+        
+      }
+
+      .kolonka2 {
+        background-color: #00ff44;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Шапка сайта -->
+      <header>
+        <h1>Владимир</h1>
+        <p>Ваш репетитор по программированию</p>
+      </header>
+
+      <!-- Блок "Обо мне" и "Сильные стороны", поделенный надвое -->
+      <div class="section split-section">
+        <!-- Левая колонка -->
+        <div class="column">
+          <h2>Обо мне</h2>
+          <p>
+            Привет! Меня зовут Владимир, и я помогаю людям с нуля погрузиться в
+            мир IT. Моя главная цель — объяснять сложные концепции простым
+            языком, чтобы программирование перестало пугать и стало
+            увлекательным процессом.
+          </p>
+        </div>
+
+        <!-- Правая колонка -->
+        <div class="column">
+          <h2>Мои сильные стороны</h2>
+          <ul>
+            <li>
+              <strong>Терпение:</strong> могу объяснять одну тему 10 раз разными
+              словами.
+            </li>
+            <li>
+              <strong>Много практики:</strong> мы сразу пишем код, а не только
+              зубрим теорию.
+            </li>
+            <li>
+              <strong>Связь 24/7:</strong> всегда на связи в мессенджерах для
+              ответов на вопросы.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Блок "Что мы будем изучать" -->
+      <div class="section">
+        <h2>Что мы будем изучать</h2>
+        <p>
+          Моя программа адаптируется под каждого ученика. Основные направления:
+        </p>
+        <ul>
+          <li>Основы веб-разработки (HTML, CSS) и создание первых сайтов.</li>
+          <li>Логика программирования и базовые алгоритмы.</li>
+          <li>Решение практических задач из реальной жизни.</li>
+          <li>Помощь с домашними заданиями или университетскими проектами.</li>
+        </ul>
+      </div>
+
+      <!-- Блок "Контакты" -->
+      <div class="section">
+        <h2>Свяжитесь со мной</h2>
+        <p>
+          Готовы написать свою первую программу или есть вопросы по обучению?
+          Жду ваших сообщений:
+        </p>
+        <p class="contact-info">Telegram: @vladimir_tutor</p>
+        <p class="contact-info">Email: vladimir.code@example.com</p>
+      </div>
+
+      <div class="stroka">
+        <div class="kolonka1">Текст</div>
+        <div class="kolonka2">Текст</div>
+      </div>
+
+      <img src="https://avatars.mds.yandex.net/i?id=7f18c7f70789c324859f7036c1ab0e49ea1a6e94-5505402-images-thumbs&n=13" alt="">
+    </div>
+  </body>
 </html>

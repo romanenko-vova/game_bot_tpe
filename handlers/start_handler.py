@@ -15,13 +15,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(user)
     # guard statement - если пользователь не найден, то запрашиваем возраст
     if not user:
-        user = await add_user(update.effective_user.id, update.effective_user.first_name)
+        user = await add_user(
+            update.effective_user.id, update.effective_user.first_name
+        )
     if not user["age"]:
         await context.bot.send_message(
             chat_id=update.effective_chat.id, text="Привет! Сколько тебе лет?"
         )
         return GET_AGE
-    
+
     if user["age"] > 15:
         await context.bot.send_message(
             chat_id=update.effective_chat.id, text="Атстань, Скуф!"
@@ -36,18 +38,21 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "Игра 'Бот угадывает число'", callback_data="guess_number"
             )
         ],
-        [
-            InlineKeyboardButton(
-                "Игра 'Крестики-нолики'", callback_data="tictactoe"
-            )
-        ],
+        [InlineKeyboardButton("Игра 'Крестики-нолики'", callback_data="tictactoe")],
         [
             InlineKeyboardButton(
                 "Крестики Нолики по сети", callback_data="online_tictactoe"
             )
         ],
         [InlineKeyboardButton("Топ игроков", callback_data="top_players")],
-        [InlineKeyboardButton('кнопка webapp', web_app=WebAppInfo('https://6785-2405-4803-5288-7840-c8d8-9f-5db6-8f6a.ngrok-free.app'))]
+        [
+            InlineKeyboardButton(
+                "кнопка webapp",
+                web_app=WebAppInfo(
+                    "https://8c4a-2405-4802-6f28-9f0-a9fc-6d10-100e-4373.ngrok-free.app"
+                ),
+            )
+        ],
     ]
     markup = InlineKeyboardMarkup(keyboard)
     context.user_data["previous_messages"] = []
@@ -56,7 +61,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text=f"Привет {update.effective_user.first_name}!\n\nНапиши команду:\n /talk чтобы поговорить со мной.\n /biba чтобы получить бобу.",
         reply_markup=markup,
     )
-    
+
     context.user_data["page"] = 1
     return MAINMENU
 
